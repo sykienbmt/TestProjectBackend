@@ -1,7 +1,7 @@
 import express, {Request, Response} from 'express'
-import { FilerShow } from './modal/FilerShow'
-import { orders, OrderTest } from './modal/OrderTest'
-import { Product ,listIphone } from './modal/Product'
+import { FilerShow } from './model/FilerShow'
+import { orders, OrderTest } from './model/OrderTest'
+import { Product ,listIphone } from './model/Product'
 var cors = require('cors')
 
 const app = express()
@@ -12,7 +12,6 @@ app.use(cors());
 let list:Product[]=listIphone
 let listOrder:OrderTest[]=orders
 
-// let item:OrderTest={buyerId:"Starr",orderId:'123123123',name:'KienNguyen',address:"bmt",phone:"0946761639",time:1640700880841,[]}
 
 app.get('/products', (req, res) => {
     res.json(list)
