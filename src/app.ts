@@ -9,11 +9,8 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cors());
 
-//TestGitSSH
-
 let list:Product[]=listIphone
 let listOrder:OrderTest[]=orders
-
 
 app.get('/products', (req, res) => {
     res.json(list)
@@ -49,7 +46,7 @@ app.put('/test', (req, res) => {
     
     let listShow:Product[]=list
     if(search!==""){
-        listShow=list.filter(item=>item.name.includes(search))
+        listShow=list.filter(item=>item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
     }
     if(filter!==""){
         let listSort=listShow

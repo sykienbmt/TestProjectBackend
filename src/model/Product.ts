@@ -21,6 +21,12 @@ export const listIphone:Product[]=[
         image:"https://cdn.tgdd.vn/Products/Images/42/213033/iphone-12-pro-max-xanh-duong-new-600x600-600x600.jpg"
     },
     {
+        id:"9999",
+        price:1011,
+        name:"SS Galaxy A51",
+        image:"https://lapmangviettelbienhoa.net/wp-content/uploads/2021/07/Samsung-Galaxy-M02.jpeg"
+    },
+    {
         id:"14",
         price:1033,
         name:"Iphone 11",
@@ -39,6 +45,18 @@ export const listIphone:Product[]=[
         image:"https://cdn.tgdd.vn/Products/Images/42/230529/iphone-13-pro-max-silver-600x600.jpg"
     },
     {
+        id:"456",
+        price:1000,
+        name:"SS Galaxy M02",
+        image:"https://lapmangviettelbienhoa.net/wp-content/uploads/2021/07/Samsung-Galaxy-M02.jpeg"
+    },
+    {
+        id:"577",
+        price:1000,
+        name:"SS Galaxy S20 FE",
+        image:"https://cdn.tgdd.vn/Products/Images/42/224859/samsung-galaxy-s20-fan-edition-090320-040338-600x600.jpg"
+    },
+    {
         id:"18",
         price:1888,
         name:"Iphone 6 Plus",
@@ -49,6 +67,12 @@ export const listIphone:Product[]=[
         price:1999,
         name:"Iphone 9",
         image:"https://www.viettablet.com/images/detailed/27/iphone-9-cu-like-new.png"
+    },
+    {
+        id:"20",
+        price:2000,
+        name:"SS Galaxy A32",
+        image:"https://cdn.tgdd.vn/Products/Images/42/234315/samsung-galaxy-a32-4g-thumb-tim-600x600-600x600.jpg"
     }
 ]
 
