@@ -3,6 +3,8 @@ import { pool } from '../db';
 import { QueryResult } from 'pg';
 import { Product } from '../model/Product';
 import { FilerShow } from '../model/FilerShow';
+import { OrderTest } from '../model/OrderTest';
+import { v4 as uuid } from 'uuid';
 
 
 export const getListProduct = async (req: Request, res: Response): Promise<Response> => {
@@ -40,7 +42,6 @@ export const shopPagination = async (req: Request, res: Response) => {
     const item:FilerShow=req.body
     const {search,filter,page,perPage}=item
     const response1: QueryResult = await pool.query(`select count(*) from product`);
-    console.log(item);
     
     let response: QueryResult= await pool.query(`SELECT * FROM product LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage]);
 
@@ -59,12 +60,29 @@ export const shopPagination = async (req: Request, res: Response) => {
         }
     }
     
-    console.log(response);
-    
     let obj={
         list:response.rows,
         count:response1.rows[0].count
     }
 
     return res.json(obj)
+}
+
+export const addOrder = async (req: Request, res: Response) => {
+    let product:OrderTest=req.body
+    const {buyerId,orderId,name,address,email,phone,time,listOrder}=product
+    await pool.query(`insert into OrderTest values ($8,$1,$2,$3,$4,$5,$6,$7)`,[buyerId,name,address,email,phone,time,JSON.stringify(listOrder),orderId]);
+    return res.json('order done')
+}
+
+export const getOrderList = async (req: Request, res: Response): Promise<Response> => {
+    try {
+        const response: QueryResult = await pool.query('select * from orderTest');
+        console.log(response.rows);
+        
+        return res.status(200).json(response.rows);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json('Internal Server error');
+    }
 }

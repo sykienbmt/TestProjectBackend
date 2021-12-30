@@ -16,7 +16,6 @@ app.use(router)
 
 
 let list:Product[]=listIphone
-let listOrder:OrderTest[]=orders
 
 
 app.get('/product/detail/:id', (req, res) => {
@@ -62,15 +61,15 @@ app.get('/product/detail/:id', (req, res) => {
 //     return res.json(obj)
 // });
 
-app.post('/order/add', (req, res) => {
-    const item:OrderTest=req.body
-    listOrder.push(item)
-    return res.json(listOrder)
-})
+// app.post('/order/add', (req, res) => {
+// //     const item:OrderTest=req.body
+// //     listOrder.push(item)
+// //     return res.json(listOrder)
+// // })
 
-app.get('/order/list', (req, res) => {
-    return res.json(listOrder)
-})
+// app.get('/order/list', (req, res) => {
+//     return res.json(listOrder)
+// })
 
 const port= 3333
 
