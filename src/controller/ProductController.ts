@@ -19,7 +19,6 @@ export const getProductDetail = async (req: Request, res: Response): Promise<Res
     const id:string =req.params.id
     const response: QueryResult = await pool.query('SELECT * FROM Product where id like $1',[id]);
     return res.status(200).json(response.rows[0]);
-
 }
 
 export const addProduct = async (req: Request, res: Response) => {
@@ -44,27 +43,24 @@ export const deleteProduct = async (req: Request, res: Response) => {
 }
 
 export const shopPagination = async (req: Request, res: Response) => {
+    
     const item:FilerShow=req.body
     const {search,filter,page,perPage}=item
     const response1: QueryResult = await pool.query(`select count(*) from product`);
     
     let response: QueryResult= await pool.query(`SELECT * FROM product LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage]);
 
-    if(search!==""){
-        response=await pool.query(`SELECT * FROM product LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage])
-    }
     if(filter!==""){
         if(filter==="AZ"){
-            response=await pool.query(`SELECT * FROM product order by name LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage])
+            response=await pool.query(`SELECT * FROM product where lower(name) like '%`+search.toLocaleLowerCase()+`%' order by name LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage])
         }else if(filter==="ZA"){
-            response=await pool.query(`SELECT * FROM product order by name desc LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage])
+            response=await pool.query(`SELECT * FROM product where lower(name) like '%`+search.toLocaleLowerCase()+`%' order by name desc LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage])
         }else if(filter==="Ascend"){
-            response=await pool.query(`SELECT * FROM product order by price LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage])
+            response=await pool.query(`SELECT * FROM product where lower(name) like '%`+search.toLocaleLowerCase()+`%' order by price LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage])
         }else if(filter==="Descend"){
-            response=await pool.query(`SELECT * FROM product order by price desc LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage])
+            response=await pool.query(`SELECT * FROM product where lower(name) like '%`+search.toLocaleLowerCase()+`%' order by price desc LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage])
         }
     }
-    
     let obj={
         list:response.rows,
         count:response1.rows[0].count

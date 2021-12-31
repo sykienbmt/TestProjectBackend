@@ -2,6 +2,7 @@ const { Pool, Client} = require("pg");
 
 import express, {Request, Response} from 'express'
 import router from './Routes';
+import routerCart from './Routes/routerCart';
 var cors = require('cors')
 
 
@@ -11,6 +12,7 @@ app.use(express.json())
 app.use(cors());
 
 app.use(router)
+app.use(routerCart)
 
 
 
