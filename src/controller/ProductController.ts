@@ -4,8 +4,6 @@ import { QueryResult } from 'pg';
 import { Product } from '../model/Product';
 import { FilerShow } from '../model/FilerShow';
 import { OrderTest } from '../model/OrderTest';
-import { v4 as uuid } from 'uuid';
-
 
 export const getListProduct = async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -15,6 +13,13 @@ export const getListProduct = async (req: Request, res: Response): Promise<Respo
         console.log(e);
         return res.status(500).json('Internal Server error');
     }
+}
+
+export const getProductDetail = async (req: Request, res: Response): Promise<Response> =>{
+    const id:string =req.params.id
+    const response: QueryResult = await pool.query('SELECT * FROM Product where id like $1',[id]);
+    return res.status(200).json(response.rows[0]);
+
 }
 
 export const addProduct = async (req: Request, res: Response) => {
