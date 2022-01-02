@@ -3,7 +3,6 @@ import { pool } from '../db';
 import { QueryResult } from 'pg';
 import { Product } from '../model/Product';
 import { FilerShow } from '../model/FilerShow';
-import { OrderTest } from '../model/OrderTest';
 
 export const getListProduct = async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -70,9 +69,9 @@ export const shopPagination = async (req: Request, res: Response) => {
 }
 
 export const addOrder = async (req: Request, res: Response) => {
-    let product:OrderTest=req.body
-    const {buyerId,orderId,name,address,email,phone,time,listOrder}=product
-    await pool.query(`insert into OrderTest values ($8,$1,$2,$3,$4,$5,$6,$7)`,[buyerId,name,address,email,phone,time,JSON.stringify(listOrder),orderId]);
+    const id_user=req.body.id_user
+    const id_order=req.body.id_order
+    await pool.query(`update "order" set is_temporary=false where id_user=$1 and id_order=$2`,[id_user,id_order])
     return res.json('order done')
 }
 
