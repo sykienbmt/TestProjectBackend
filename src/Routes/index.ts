@@ -1,29 +1,32 @@
 import {Router} from 'express'
-import { addProductToCart, deleteProductFromCart, getProductFromCart, getTotalFromCart, getUserInfo, getUserOrderInfo, updateQuantity } from '../controller/CartController';
-import { addOrder, addProduct, deleteProduct, getListProduct, getOrderList, getProductDetail, shopPagination, updateProduct } from '../controller/ProductController';
+import { handleAddProductToCart, handleDeleteProductFromCart, handleGetOrderList, handleGetOrderListWithPagination, handleGetProductFromCart, handleGetTotalFromCart, handleUpdateQuantityProductFromCart} from '../controller/CartController';
+import { handleAddOrder, handleGetUserOrderInfo } from '../controller/OrderController';
+import { handleAddProduct, handleDeleteProduct, handleGetListProduct, handleGetProductDetail, handleUpdateProduct, showShopPagination } from '../controller/ProductController';
+import { handleGetUserInfo } from '../controller/UserController';
 const router = Router();
 
 
 
 
-router.get('/products', getListProduct)
-router.put('/products/add',addProduct)
-router.put('/products/update',updateProduct)
-router.get('/products/delete/:id',deleteProduct)
-router.put('/pagi',shopPagination)
-router.get('/product/detail/:id',getProductDetail)
+router.get('/products', handleGetListProduct)
+router.put('/products/add',handleAddProduct)
+router.put('/products/update',handleUpdateProduct)
+router.get('/products/delete/:id',handleDeleteProduct)
+router.put('/pagi',showShopPagination)
+router.get('/product/detail/:id',handleGetProductDetail)
 
 
-router.post('/order/add',addOrder)
-router.get('/order/get',getOrderList)
+router.post('/order/add',handleAddOrder)
+router.put('/order/get',handleGetOrderList)
+router.put('/order/getWithPagination',handleGetOrderListWithPagination)
 
-router.put('/user',getUserOrderInfo)
-router.put('/user/getInfo',getUserInfo)
+router.put('/user',handleGetUserOrderInfo)
+router.put('/user/getInfo',handleGetUserInfo)
 
-router.put('/cart',getProductFromCart)
-router.put('/cart/add',addProductToCart)
-router.put('/cart/delete',deleteProductFromCart)
-router.put('/cart/total',getTotalFromCart)
-router.put('/cart/update',updateQuantity)
+router.put('/cart',handleGetProductFromCart)
+router.put('/cart/add',handleAddProductToCart)
+router.put('/cart/delete',handleDeleteProductFromCart)
+router.put('/cart/total',handleGetTotalFromCart)
+router.put('/cart/update',handleUpdateQuantityProductFromCart)
 
 export default router;

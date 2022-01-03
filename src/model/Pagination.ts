@@ -1,4 +1,4 @@
-export interface FilerShow{
+export interface Pagination{
     search:string
     filter:string
     page:number
