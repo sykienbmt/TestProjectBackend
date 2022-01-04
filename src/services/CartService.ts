@@ -114,7 +114,7 @@ export const getOrderList = async (id_user:string)=> {
 
 
 export const getOrderListWithPagination = async (id_user:string,page:number,perPage:number)=> {
-    const userOrders:QueryResult= await pool.query(`select op.id_order,o.id_user,to_char(o.time_order , 'DD/MM/YYYY || HH24:MI:SS') time_order,o.total , op.id,op.price ,op.quantity,
+    const userOrders:QueryResult= await pool.query(`select op.id_order,o.id_user,to_char(o.time_order , 'HH24:MI:SS - DD/MM/YYYY') time_order,o.total , op.id,op.price ,op.quantity,
     p."name" ,p.image ,u."name" nameUser,u.address ,u.phone ,u.email from "user" u join "order" o on u.id_user =o.id_user 
     join order_product op on op.id_order =o.id_order
     join product p on p.id =op.id
