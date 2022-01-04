@@ -1,7 +1,4 @@
 import { Request, Response } from 'express';
-import { pool } from '../db';
-import { QueryResult } from 'pg';
-import { addOrder } from '../services/OrderService';
 import { getUserInfo } from '../services/UserService';
 
 

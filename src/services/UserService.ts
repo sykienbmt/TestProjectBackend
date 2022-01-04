@@ -1,5 +1,5 @@
 import { QueryResult } from "pg";
-import { pool } from "../db";
+import { pool } from "../dbConnect/db";
 import Order from "../model/Order";
 import { Pagination } from "../model/Pagination";
 import { Product } from "../model/Product";

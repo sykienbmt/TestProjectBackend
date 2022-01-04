@@ -1,5 +1,5 @@
 import { QueryResult } from "pg";
-import { pool } from "../db";
+import { pool } from "../dbConnect/db";
 import { Pagination } from "../model/Pagination";
 import { Product } from "../model/Product";
 
@@ -26,12 +26,14 @@ class ProductService{
     }
 
     list = async (pagination:Pagination) => {
-        
         const item:Pagination=pagination
         const {search,filter,page,perPage}=item
         const response1: QueryResult = await pool.query(`select count(*) from product`);
         let response: QueryResult= await pool.query(`SELECT * FROM product LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage]);
 
+        if(search!=""){
+            response=await pool.query(`SELECT * FROM product where lower(name) like '%`+search.toLocaleLowerCase()+`%' LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage])
+        }
         if(filter!==""){
             if(filter==="AZ"){
                 response=await pool.query(`SELECT * FROM product where lower(name) like '%`+search.toLocaleLowerCase()+`%' order by name LIMIT $2 OFFSET (($1-1) * $2)`,[page,perPage])

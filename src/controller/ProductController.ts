@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { pool } from '../db';
+import { pool } from '../dbConnect/db';
 import { QueryResult } from 'pg';
 import { Product } from '../model/Product';
 import { Pagination } from '../model/Pagination';
