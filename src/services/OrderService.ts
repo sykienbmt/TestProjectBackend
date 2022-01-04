@@ -4,7 +4,7 @@ import Order, { OrderWithDetailAddress } from "../model/Order";
 const { v4: uuid } = require('uuid');
 
 class OrderService{
-    add = async (id_user:string,id_order:string) => {
+    update = async (id_user:string,id_order:string) => {
         await pool.query(`update "order" set is_temporary=false,time_order=NOW()::timestamp where id_user=$1 and id_order=$2`,[id_user,id_order])
     }
     

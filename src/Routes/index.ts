@@ -14,7 +14,7 @@ router.get('/products/delete/:id',productController.delete)
 router.get('/product/detail/:id',productController.get)
 
 //order router
-router.put('/order/add',orderController.add)
+router.put('/order/add',orderController.update)
 router.put('/order/list',orderController.list)
 
 //user router

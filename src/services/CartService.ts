@@ -1,6 +1,5 @@
 import { QueryResult } from "pg";
 import { pool } from "../dbConnect/db";
-import Order, { OrderWithDetailAddress } from "../model/Order";
 import { OrderProduct } from "../model/OrderProduct";
 const { v4: uuid } = require('uuid');
 

@@ -3,8 +3,8 @@ import { orderService } from '../services/OrderService';
 
 
 class OrderController{
-    add = async (req: Request, res: Response) => {
-        await orderService.add(req.body.id_user,req.body.id_order)
+    update = async (req: Request, res: Response) => {
+        await orderService.update(req.body.id_user,req.body.id_order)
         return res.json('order done')
     }
 
