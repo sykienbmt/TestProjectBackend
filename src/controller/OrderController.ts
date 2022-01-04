@@ -1,14 +1,26 @@
 import { Request, Response } from 'express';
-import { addOrder, getUserOrderInfo } from '../services/OrderService';
+import { orderService } from '../services/OrderService';
 
-export const handleGetUserOrderInfo = async (req: Request, res: Response)=> {
-    const id_user:string=req.body.id_user
-    let order=await getUserOrderInfo(id_user)
-    return res.json(order);
+
+class OrderController{
+    add = async (req: Request, res: Response) => {
+        await orderService.add(req.body.id_user,req.body.id_order)
+        return res.json('order done')
+    }
+
+    getUserInfo = async (req: Request, res: Response)=> {
+        const id_user:string=req.body.id_user
+        let data=await orderService.get(id_user)
+        return res.json(data);
+    }
+
+    list= async (req:Request,res:Response)=>{
+        const orderPagination=req.body
+        const{id_user,page,perPage}=orderPagination
+        const data = await orderService.list(id_user,page,perPage)
+        return res.json(data)
+    }
 }
 
-export const handleAddOrder = async (req: Request, res: Response) => {
-    await addOrder(req.body.id_user,req.body.id_order)
-    return res.json('order done')
-}
+export const orderController = new OrderController()
 

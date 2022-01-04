@@ -5,8 +5,16 @@ import { addOrder } from '../services/OrderService';
 import { getUserInfo } from '../services/UserService';
 
 
-export const handleGetUserInfo = async (req: Request, res: Response)=> {
-    const id_user:string=req.body.id_user
-    const data =getUserInfo(id_user)
-    return res.json(data);
+
+class UserController{
+
+    get = async (req: Request, res: Response)=> {
+        const id_user:string=req.body.id_user
+        const data =getUserInfo(id_user)
+        return res.json(data);
+    }
+
 }
+
+export const userController = new UserController()
+
