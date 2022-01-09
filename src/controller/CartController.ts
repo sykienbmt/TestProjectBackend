@@ -7,14 +7,14 @@ const { v4: uuid } = require('uuid');
 class CartController{
     
     getCarts = async (req: Request, res: Response) => {
-        const id_order=req.body.id_order
-        const data = await cartService.getProductFromCart(id_order)
+        const data = await cartService.getProductFromCart(req.body.data.id_user)
         return res.json(data)
     }
     
     create = async (req: Request, res: Response) => {
         let order_product:OrderProduct=req.body
-        const data =await cartService.create(order_product)
+        await cartService.create(order_product)
+        const data = await cartService.getProductFromCart(req.body.data.id_user)
         return res.json(data)
     }
     
@@ -22,7 +22,8 @@ class CartController{
     delete = async (req: Request, res: Response) => {
         let order:OrderProduct=req.body
         await cartService.delete(order)
-        return res.json('delete+ update total done')
+        const data = await cartService.getProductFromCart(req.body.data.id_user)
+        return res.json(data)
     }
     
     getTotal = async (req: Request, res: Response) => {
@@ -35,7 +36,8 @@ class CartController{
     update = async (req: Request, res: Response) => {
         let order:OrderProduct=req.body
         await cartService.update(order)
-        return res.json('add product to cart done')
+        const list=await cartService.getProductFromCart(req.body.data.id_user);
+        return res.json(list)
     }
     
     

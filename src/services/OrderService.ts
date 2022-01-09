@@ -9,13 +9,14 @@ class OrderService{
     }
     
     get = async (id_user:string)=> {
-        const checkUser:QueryResult=await pool.query(`select * from "order" where id_user=$1 and is_temporary=true`,[id_user])
+        let checkUser:QueryResult=await pool.query(`select * from "order" where id_user=$1 and is_temporary=true`,[id_user])
         if(checkUser.rows.length===0){
             await pool.query(`insert into "order" values($1,$2,$3,$4)`,[uuid(),id_user,0,true]);
+            checkUser=await pool.query(`select * from "order" where id_user=$1 and is_temporary=true`,[id_user])
         }
         const response: QueryResult = await pool.query(`select * from "order" where id_user=$1 and is_temporary=true`,[id_user]);
-        const order:Order=response.rows[0]
-        return ({order})
+        // const order:Order=checkUser.rows[0]
+        return (response.rows[0])
     }
 
     list = async (id_user:string,page:number,perPage:number)=> {
